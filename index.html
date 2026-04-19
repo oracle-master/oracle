@@ -47,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 15% 30%, rgba(60, 30, 120, 0.12) 0%, transparent 45%);
+            background: radial-gradient(circle at 15% 30%, rgba(80, 40, 160, 0.15) 0%, transparent 45%);
             z-index: -2;
             animation: nebulaMove 45s infinite alternate;
         }
@@ -57,13 +57,13 @@
             right: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 85% 70%, rgba(20, 40, 100, 0.08) 0%, transparent 55%);
+            background: radial-gradient(circle at 85% 70%, rgba(30, 60, 140, 0.1) 0%, transparent 55%);
             z-index: -2;
             animation: nebulaMove 55s infinite alternate-reverse;
         }
         @keyframes nebulaMove {
             0% { opacity: 0.3; transform: scale(1); }
-            100% { opacity: 0.7; transform: scale(1.06); }
+            100% { opacity: 0.8; transform: scale(1.08); }
         }
         .stars-layer {
             position: fixed;
@@ -86,22 +86,56 @@
         .star:nth-child(5n) { background: #c0d8ff; box-shadow: 0 0 20px #a0c0ff, 0 0 40px #6080d0; }
         .star:nth-child(7n) { background: #ffffff; box-shadow: 0 0 25px #ffffff, 0 0 50px #c0b0e0; }
         @keyframes starTwinkle {
-            0%, 100% { opacity: 0.15; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1.2); }
+            0%, 100% { opacity: 0.1; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.3); }
         }
+
+        /* ----- ПАДАЮЩИЕ ЗВЁЗДЫ ----- */
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: transparent;
+            border-radius: 50%;
+            box-shadow: 0 0 80px 2px rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+            transform-origin: left center;
+            transform: rotate(-45deg) translateX(-100%);
+            filter: blur(1px);
+        }
+        .shooting-star:nth-child(1) { top: 10%; left: 90%; animation: shootingStar 3s ease-in 1s infinite; }
+        .shooting-star:nth-child(2) { top: 25%; left: 15%; animation: shootingStar 4s ease-in 3s infinite; }
+        .shooting-star:nth-child(3) { top: 60%; left: 95%; animation: shootingStar 3.5s ease-in 5s infinite; }
+        @keyframes shootingStar {
+            0% { opacity: 0; transform: translateX(0) translateY(0); }
+            10% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(-250px) translateY(250px); }
+        }
+
         .main-title {
             font-family: 'Great Vibes', 'Cormorant Garamond', cursive;
             font-size: 56px;
             font-weight: 700;
             letter-spacing: 4px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             margin-top: 0;
-            background: linear-gradient(135deg, #c9a84c 0%, #f8e8b0 20%, #d4af37 35%, #fff8e0 50%, #c0c0c0 65%, #e8d5a0 80%, #b8a880 100%);
+            background: linear-gradient(135deg, #f0d060 0%, #fff8e0 20%, #d4af37 35%, #ffffff 50%, #c0c0c0 65%, #e8d5a0 80%, #b8a880 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 30px rgba(212, 175, 55, 0.6), 0 0 60px rgba(192, 192, 192, 0.4);
-            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.7), 0 0 80px rgba(192, 192, 192, 0.5);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
             text-align: center;
             line-height: 1.1;
             width: 100%;
@@ -109,16 +143,22 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            animation: titleGlow 3s infinite alternate;
+        }
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(192, 192, 192, 0.3); }
+            100% { text-shadow: 0 0 50px rgba(255, 235, 100, 1), 0 0 100px rgba(255, 255, 255, 0.6); }
         }
         .title-deco-left, .title-deco-right {
             font-family: 'Times New Roman', serif;
             font-size: 36px;
-            opacity: 0.6;
-            background: linear-gradient(135deg, #c9a84c, #c0c0c0);
+            opacity: 0.8;
+            background: linear-gradient(135deg, #d4af37, #f0e0a0, #c0c0c0);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
+
         .crystal-container {
             max-width: 360px;
             width: 100%;
@@ -128,10 +168,10 @@
             align-items: center;
             flex: 1;
             min-height: 0;
-            justify-content: space-evenly;
+            justify-content: center;
         }
 
-        /* ----- ГИПЕРРЕАЛИСТИЧНЫЙ 3D ХРУСТАЛЬНЫЙ ШАР (v2) ----- */
+        /* ----- ИДЕАЛЬНО КРУГЛЫЙ ШАР ----- */
         .crystal-ball {
             background: 
                 radial-gradient(circle at 25% 20%, 
@@ -146,12 +186,11 @@
             max-width: 340px;
             aspect-ratio: 1 / 1;
             border-radius: 50%;
-            padding: 18px 16px;
             border: none;
             
             box-shadow: 
-                0 0 120px rgba(80, 140, 255, 0.6),
-                0 0 200px rgba(50, 80, 200, 0.4),
+                0 0 140px rgba(80, 160, 255, 0.7),
+                0 0 250px rgba(50, 100, 220, 0.5),
                 0 25px 45px rgba(0, 0, 0, 0.7),
                 inset 0 -15px 30px rgba(0, 0, 0, 0.5),
                 inset 0 15px 25px rgba(255, 255, 255, 0.6),
@@ -167,6 +206,18 @@
             animation: floatSphere 9s infinite ease-in-out;
             overflow: hidden;
             transform: perspective(800px) rotateX(2deg) rotateY(-3deg);
+        }
+
+        .crystal-content {
+            position: relative;
+            z-index: 6;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 16px;
         }
 
         .crystal-ball::before {
@@ -185,6 +236,11 @@
             filter: blur(2.5px);
             z-index: 4;
             transform: rotate(-12deg);
+            animation: mainGlint 4s infinite ease-in-out;
+        }
+        @keyframes mainGlint {
+            0%, 100% { opacity: 0.8; width: 32%; height: 18%; }
+            50% { opacity: 1; width: 35%; height: 20%; }
         }
 
         .crystal-ball::after {
@@ -199,6 +255,11 @@
             filter: blur(0.8px);
             z-index: 5;
             box-shadow: 0 0 25px rgba(255, 255, 255, 1);
+            animation: secondGlint 3s infinite ease-in-out;
+        }
+        @keyframes secondGlint {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
         }
 
         .crystal-reflection {
@@ -214,6 +275,11 @@
             border-radius: 50%;
             filter: blur(5px);
             z-index: 3;
+            animation: reflectionPulse 5s infinite alternate;
+        }
+        @keyframes reflectionPulse {
+            0% { opacity: 0.4; }
+            100% { opacity: 0.8; }
         }
 
         .crystal-side-glow {
@@ -235,12 +301,17 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             background: radial-gradient(circle at 45% 45%, 
-                rgba(140, 200, 255, 0.3) 0%, 
-                rgba(80, 140, 255, 0.15) 30%,
-                rgba(40, 80, 180, 0.08) 55%,
+                rgba(140, 200, 255, 0.4) 0%, 
+                rgba(80, 140, 255, 0.2) 30%,
+                rgba(40, 80, 180, 0.1) 55%,
                 transparent 70%);
             z-index: 1;
             border-radius: 50%;
+            animation: corePulse 4s infinite alternate;
+        }
+        @keyframes corePulse {
+            0% { opacity: 0.6; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1.05); }
         }
 
         .core-shadow {
@@ -261,14 +332,6 @@
             50% { transform: perspective(800px) rotateX(3deg) rotateY(-5deg) translateY(-6px); }
         }
 
-        .crystal-content {
-            position: relative;
-            z-index: 6;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
         .answer-screen {
             background: rgba(2, 1, 10, 0.75);
             backdrop-filter: blur(12px);
@@ -276,53 +339,72 @@
             border-radius: 40px;
             padding: 18px 8px;
             width: 100%;
-            border: 1px solid rgba(150, 180, 255, 0.5);
-            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(80, 120, 220, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.4);
             margin-bottom: 12px;
             min-height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
+
         #answer-text {
-            color: #f0f5ff;
+            color: #f5f0ff;
             font-size: 24px;
             font-weight: bold;
-            text-shadow: 0 0 30px #a0c0ff, 0 0 12px #ffffff;
+            text-shadow: 0 0 30px #d4af37, 0 0 15px #ffffff;
             line-height: 1.2;
             pointer-events: none;
             user-select: none;
-            transition: opacity 0.15s;
+            transition: opacity 0.2s;
             font-style: italic;
             text-align: center;
             word-break: break-word;
         }
+
+        .answer-reveal {
+            animation: textReveal 0.8s ease-out forwards;
+        }
+        @keyframes textReveal {
+            0% { opacity: 0; filter: blur(8px); transform: scale(0.9); text-shadow: 0 0 50px #d4af37; }
+            50% { filter: blur(4px); }
+            100% { opacity: 1; filter: blur(0); transform: scale(1); text-shadow: 0 0 30px #d4af37, 0 0 15px #ffffff; }
+        }
+
         .crystal-symbol {
-            color: #80b0ff;
+            color: #d4af37;
             font-size: 14px;
             letter-spacing: 8px;
             opacity: 0.9;
-            text-shadow: 0 0 15px #4080e0;
+            text-shadow: 0 0 15px #ffd700, 0 0 30px #b8900c;
+            animation: symbolPulse 2s infinite alternate;
         }
+        @keyframes symbolPulse {
+            0% { opacity: 0.6; text-shadow: 0 0 10px #d4af37; }
+            100% { opacity: 1; text-shadow: 0 0 25px #ffd700, 0 0 40px #b8900c; }
+        }
+
         .ritual-panel {
-            background: rgba(5, 3, 12, 0.45);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            border: 1px solid rgba(100, 160, 255, 0.5);
+            background: rgba(5, 3, 12, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, 0.6);
             border-radius: 30px;
             padding: 8px 10px;
             margin-bottom: 12px;
-            box-shadow: 0 0 25px rgba(50, 100, 220, 0.4);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
             width: 100%;
         }
+
         .steps-column {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 3px;
         }
+
         .step-row {
-            color: #c0d8ff;
+            color: #e8dcc8;
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -331,17 +413,19 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            opacity: 0.9;
+            opacity: 0.95;
         }
+
         .step-bullet {
             font-size: 12px;
-            color: #80b0ff;
-            text-shadow: 0 0 10px #4080e0;
+            color: #d4af37;
+            text-shadow: 0 0 10px #ffd700;
         }
+
         .ask-btn {
             background: #0a0418;
-            border: 1.5px solid #5080d0;
-            color: #e0ecff;
+            border: 2px solid #d4af37;
+            color: #f5ecc0;
             font-size: 20px;
             padding: 14px 20px;
             width: 100%;
@@ -350,23 +434,32 @@
             font-family: 'Times New Roman', serif;
             text-transform: uppercase;
             letter-spacing: 10px;
-            font-weight: 400;
-            box-shadow: 0 8px 0 #020106, 0 0 40px #3060c0;
+            font-weight: 500;
+            box-shadow: 0 8px 0 #020106, 0 0 45px #d4af37;
             transition: all 0.08s;
             margin-bottom: 10px;
-            text-shadow: 0 0 15px #80b0f0;
+            text-shadow: 0 0 15px #ffd700;
+            animation: btnPulse 2.5s infinite ease-in-out;
         }
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 8px 0 #020106, 0 0 35px #d4af37; border-color: #d4af37; }
+            50% { box-shadow: 0 8px 0 #020106, 0 0 60px #ffd700, 0 0 80px #ffec80; border-color: #ffec80; }
+        }
+
         .ask-btn:active {
             transform: translateY(5px);
-            box-shadow: 0 3px 0 #020106, 0 0 50px #6080d0;
+            box-shadow: 0 3px 0 #020106, 0 0 70px #ffd700;
         }
+
         .ask-btn:disabled {
             opacity: 0.6;
             transform: translateY(4px);
-            box-shadow: 0 4px 0 #020106, 0 0 20px #3050a0;
+            box-shadow: 0 4px 0 #020106, 0 0 25px #b8900c;
+            animation: none;
         }
+
         .portal-status {
-            color: #80b0f0;
+            color: #d4c890;
             font-size: 11px;
             min-height: 20px;
             letter-spacing: 3px;
@@ -374,26 +467,21 @@
             text-align: center;
             margin-bottom: 6px;
             font-weight: 400;
-            text-shadow: 0 0 12px #3070d0;
+            text-shadow: 0 0 10px #b8900c;
         }
+
         .counter-text {
-            color: #90a8e0;
+            color: #c0b090;
             font-size: 10px;
             letter-spacing: 3px;
             text-transform: uppercase;
             text-align: center;
             opacity: 0.9;
+            text-shadow: 0 0 8px #b8900c;
         }
-        .flash-answer {
-            animation: crystalAnswer 0.6s ease-out;
-        }
-        @keyframes crystalAnswer {
-            0% { text-shadow: 0 0 10px #ffffff; }
-            30% { text-shadow: 0 0 60px #c0d8ff, 0 0 120px #80b0f0, 0 0 20px #ffffff; }
-            100% { text-shadow: 0 0 30px #a0c0ff, 0 0 12px #ffffff; }
-        }
+
         .warning-nfc {
-            color: #b88080;
+            color: #c08080;
             font-size: 9px;
             margin-top: 4px;
             letter-spacing: 2px;
@@ -407,11 +495,17 @@
     <div class="nebula-one"></div>
     <div class="nebula-two"></div>
     <div class="stars-layer" id="starsLayer"></div>
+    
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+
     <div class="main-title">
         <span class="title-deco-left">-=</span>
         Оракул
         <span class="title-deco-right">=-</span>
     </div>
+
     <div class="crystal-container">
         <div class="crystal-ball">
             <div class="inner-glow"></div>
@@ -425,6 +519,7 @@
                 <div class="crystal-symbol">◈ ◈ ◈</div>
             </div>
         </div>
+
         <div class="ritual-panel">
             <div class="steps-column">
                 <div class="step-row"><span class="step-bullet">•</span><span>ЗАДАЙ ВОПРОС</span></div>
@@ -433,14 +528,17 @@
                 <div class="step-row"><span class="step-bullet">•</span><span>ПРИЛОЖИ БРЕЛОК</span></div>
             </div>
         </div>
+
         <button class="ask-btn" id="askButton">ЗАДАТЬ ВОПРОС</button>
         <div class="portal-status" id="portalStatus">Нажмите кнопку</div>
         <div class="warning-nfc" id="warningMsg">NFC недоступен. Используйте Chrome на Android.</div>
         <div class="counter-text"><span id="counterDisplay">0</span> ОТКРОВЕНИЙ</div>
     </div>
+
     <script>
         (function(){
             "use strict";
+
             function generateStars() {
                 const layer = document.getElementById('starsLayer');
                 for (let i = 0; i < 180; i++) {
@@ -457,61 +555,105 @@
                 }
             }
             generateStars();
+
+            function playMagicSound() {
+                try {
+                    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    const oscillator = audioCtx.createOscillator();
+                    const gainNode = audioCtx.createGain();
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioCtx.destination);
+                    oscillator.type = 'sine';
+                    oscillator.frequency.value = 880;
+                    gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    oscillator.start();
+                    oscillator.stop(audioCtx.currentTime + 0.3);
+                    const osc2 = audioCtx.createOscillator();
+                    const gain2 = audioCtx.createGain();
+                    osc2.connect(gain2);
+                    gain2.connect(audioCtx.destination);
+                    osc2.type = 'triangle';
+                    osc2.frequency.value = 1320;
+                    gain2.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                    gain2.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+                    osc2.start();
+                    osc2.stop(audioCtx.currentTime + 0.25);
+                } catch(e) {}
+            }
+
             const positive = ["Да", "Звёзды — да", "Всё сложится", "Благоприятно", "Не сомневайся", "Истинно", "Удача рядом", "Путь открыт", "Знаки добрые", "Верь в успех", "Так и будет", "Твоя правда", "Перспективы ясны", "Скоро", "Предначертано"];
             const neutral = ["Неясно", "Туманно", "Спроси позже", "Всё в твоих руках", "Время покажет", "Возможно", "Не сейчас", "Пятьдесят на пятьдесят", "Судьба молчит", "Размыто", "И да, и нет", "Неопределённо", "Доверься себе", "Переменчиво", "Равновесие"];
             const negative = ["Нет", "Звёзды против", "Не надейся", "Не в этот раз", "Отступись", "Путь закрыт", "Препятствия", "Не стоит", "Повремени", "Иллюзии", "Неблагоприятно", "Забудь", "Ловушка", "Ответ — нет", "Не сейчас"];
             const allAnswers = [...positive, ...neutral, ...negative];
+
             const answerElement = document.getElementById('answer-text');
             const askButton = document.getElementById('askButton');
             const portalStatus = document.getElementById('portalStatus');
             const warningMsg = document.getElementById('warningMsg');
             const counterSpan = document.getElementById('counterDisplay');
+
             let revelationCount = 0;
             try { const saved = localStorage.getItem('crystal_oracle_count'); if (saved) revelationCount = parseInt(saved, 10) || 0; } catch(e) {}
             function updateCounter() { counterSpan.textContent = revelationCount; try { localStorage.setItem('crystal_oracle_count', revelationCount); } catch(e) {} }
             updateCounter();
+
             let ndefReader = null;
             let isScanning = false;
             let cooldown = false;
             const COOLDOWN_TIME = 8000;
+
             function deliverProphecy() {
                 if (!isScanning) return;
                 if (cooldown) return;
+                
                 revelationCount++;
                 updateCounter();
+                
                 const prophecy = allAnswers[Math.floor(Math.random() * allAnswers.length)];
-                answerElement.style.opacity = '0.2';
-                setTimeout(() => {
-                    answerElement.textContent = prophecy;
-                    answerElement.style.opacity = '1';
-                    answerElement.classList.add('flash-answer');
-                    setTimeout(() => answerElement.classList.remove('flash-answer'), 600);
-                }, 70);
-                if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(35);
+                
+                answerElement.classList.remove('answer-reveal');
+                void answerElement.offsetWidth;
+                answerElement.textContent = prophecy;
+                answerElement.classList.add('answer-reveal');
+                
+                if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(40);
+                playMagicSound();
+                
                 cooldown = true;
                 portalStatus.textContent = 'Подождите немного...';
+                
                 if (ndefReader) { try { ndefReader.stop(); } catch(e) {} ndefReader = null; }
                 isScanning = false;
                 askButton.disabled = false;
                 askButton.textContent = 'ЗАДАТЬ ВОПРОС';
-                setTimeout(() => { cooldown = false; if (!isScanning) portalStatus.textContent = 'Нажмите кнопку'; }, COOLDOWN_TIME);
+                
+                setTimeout(() => { 
+                    cooldown = false; 
+                    if (!isScanning) portalStatus.textContent = 'Нажмите кнопку'; 
+                }, COOLDOWN_TIME);
             }
+
             if (!('NDEFReader' in window)) {
                 askButton.disabled = true;
                 warningMsg.style.display = 'block';
                 portalStatus.textContent = 'NFC не поддерживается';
             }
+
             async function startScan() {
                 if (!('NDEFReader' in window)) { portalStatus.textContent = 'NFC недоступен'; return; }
                 if (isScanning) { portalStatus.textContent = 'Сканер уже активен'; return; }
                 if (cooldown) { portalStatus.textContent = 'Подождите немного...'; return; }
+                
                 try {
                     ndefReader = new NDEFReader();
                     portalStatus.textContent = 'Приложите брелок';
                     askButton.disabled = true;
                     askButton.textContent = 'ПРИЛОЖИТЕ БРЕЛОК';
                     isScanning = true;
+                    
                     await ndefReader.scan();
+                    
                     ndefReader.onreading = () => { deliverProphecy(); };
                     ndefReader.onreadingerror = () => { 
                         portalStatus.textContent = 'Ошибка чтения'; 
@@ -526,6 +668,7 @@
                     isScanning = false;
                 }
             }
+
             askButton.addEventListener('click', startScan);
         })();
     </script>
