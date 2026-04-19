@@ -11,7 +11,6 @@
             margin: 0;
             padding: 0;
         }
-
         html, body {
             width: 100%;
             height: 100vh;
@@ -22,7 +21,6 @@
             right: 0;
             bottom: 0;
         }
-
         body {
             background: #010003;
             display: flex;
@@ -33,7 +31,6 @@
             padding: 12px 16px;
             margin: 0;
         }
-
         body::before {
             content: '';
             position: fixed;
@@ -44,7 +41,6 @@
             background: radial-gradient(circle at 35% 25%, #060212 0%, #010003 100%);
             z-index: -3;
         }
-
         .nebula-one {
             position: fixed;
             top: 0;
@@ -55,7 +51,6 @@
             z-index: -2;
             animation: nebulaMove 45s infinite alternate;
         }
-
         .nebula-two {
             position: fixed;
             bottom: 0;
@@ -66,12 +61,10 @@
             z-index: -2;
             animation: nebulaMove 55s infinite alternate-reverse;
         }
-
         @keyframes nebulaMove {
             0% { opacity: 0.3; transform: scale(1); }
             100% { opacity: 0.7; transform: scale(1.06); }
         }
-
         .stars-layer {
             position: fixed;
             top: 0;
@@ -81,7 +74,6 @@
             z-index: -1;
             overflow: hidden;
         }
-
         .star {
             position: absolute;
             background: #f0e8ff;
@@ -90,16 +82,13 @@
             animation: starTwinkle 2.5s infinite ease-in-out;
             box-shadow: 0 0 15px #d0c0f0, 0 0 30px #a890d0;
         }
-
         .star:nth-child(3n) { background: #ffe8c0; box-shadow: 0 0 18px #ffd080, 0 0 35px #d4a040; }
         .star:nth-child(5n) { background: #c0d8ff; box-shadow: 0 0 20px #a0c0ff, 0 0 40px #6080d0; }
         .star:nth-child(7n) { background: #ffffff; box-shadow: 0 0 25px #ffffff, 0 0 50px #c0b0e0; }
-
         @keyframes starTwinkle {
             0%, 100% { opacity: 0.15; transform: scale(0.5); }
             50% { opacity: 1; transform: scale(1.2); }
         }
-
         .main-title {
             font-family: 'Great Vibes', 'Cormorant Garamond', cursive;
             font-size: 56px;
@@ -130,7 +119,6 @@
             background-clip: text;
             color: transparent;
         }
-
         .crystal-container {
             max-width: 360px;
             width: 100%;
@@ -142,7 +130,6 @@
             min-height: 0;
             justify-content: space-evenly;
         }
-
         .crystal-ball {
             background: radial-gradient(circle at 20% 25%, rgba(255, 255, 255, 0.95) 0%, rgba(240, 235, 255, 0.7) 8%, rgba(200, 180, 240, 0.5) 18%, rgba(120, 90, 180, 0.6) 35%, rgba(60, 35, 100, 0.8) 55%, rgba(20, 10, 45, 0.95) 80%, #050210 100%);
             width: 100%;
@@ -162,7 +149,6 @@
             overflow: hidden;
             transform: perspective(800px) rotateX(2deg) rotateY(-3deg);
         }
-
         .crystal-ball::before {
             content: '';
             position: absolute;
@@ -174,7 +160,6 @@
             z-index: 3;
             transform: rotate(-15deg);
         }
-
         .crystal-ball::after {
             content: '';
             position: absolute;
@@ -186,7 +171,6 @@
             z-index: 4;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
         }
-
         .crystal-reflection {
             position: absolute;
             bottom: 12%; right: 10%;
@@ -196,7 +180,6 @@
             filter: blur(8px);
             z-index: 3;
         }
-
         .crystal-side-glow {
             position: absolute;
             top: 40%; right: 5%;
@@ -206,12 +189,10 @@
             filter: blur(7px);
             z-index: 2;
         }
-
         @keyframes floatSphere {
             0%, 100% { transform: perspective(800px) rotateX(2deg) rotateY(-3deg) translateY(0px); }
             50% { transform: perspective(800px) rotateX(3deg) rotateY(-5deg) translateY(-6px); }
         }
-
         .inner-glow {
             position: absolute;
             top: 0; left: 0;
@@ -220,7 +201,6 @@
             z-index: 1;
             border-radius: 50%;
         }
-
         .core-shadow {
             position: absolute;
             top: 50%; left: 50%;
@@ -230,7 +210,6 @@
             z-index: 1;
             border-radius: 50%;
         }
-
         .crystal-content {
             position: relative;
             z-index: 5;
@@ -239,7 +218,6 @@
             flex-direction: column;
             align-items: center;
         }
-
         .answer-screen {
             background: rgba(5, 2, 15, 0.7);
             backdrop-filter: blur(10px);
@@ -255,7 +233,6 @@
             align-items: center;
             justify-content: center;
         }
-
         #answer-text {
             color: #f5eeff;
             font-size: 24px;
@@ -269,7 +246,6 @@
             text-align: center;
             word-break: break-word;
         }
-
         .crystal-symbol {
             color: #5a3a80;
             font-size: 14px;
@@ -277,7 +253,6 @@
             opacity: 0.8;
             text-shadow: 0 0 10px #b898e8;
         }
-
         .ritual-panel {
             background: rgba(5, 3, 12, 0.45);
             backdrop-filter: blur(6px);
@@ -289,14 +264,12 @@
             box-shadow: 0 0 20px rgba(40, 20, 80, 0.2);
             width: 100%;
         }
-
         .steps-column {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 3px;
         }
-
         .step-row {
             color: #c0b0d8;
             font-size: 10px;
@@ -309,13 +282,11 @@
             gap: 6px;
             opacity: 0.85;
         }
-
         .step-bullet {
             font-size: 12px;
             color: #b090d0;
             text-shadow: 0 0 8px #8868b0;
         }
-
         .ask-btn {
             background: #0a0418;
             border: 1.5px solid #8060b0;
@@ -334,18 +305,15 @@
             margin-bottom: 10px;
             text-shadow: 0 0 15px #b090e0;
         }
-
         .ask-btn:active {
             transform: translateY(5px);
             box-shadow: 0 3px 0 #020106, 0 0 50px #9060d0;
         }
-
         .ask-btn:disabled {
             opacity: 0.6;
             transform: translateY(4px);
             box-shadow: 0 4px 0 #020106, 0 0 20px #4a3070;
         }
-
         .portal-status {
             color: #9a80b8;
             font-size: 11px;
@@ -357,7 +325,6 @@
             font-weight: 400;
             text-shadow: 0 0 10px #7050a0;
         }
-
         .counter-text {
             color: #a890c8;
             font-size: 10px;
@@ -366,17 +333,14 @@
             text-align: center;
             opacity: 0.85;
         }
-
         .flash-answer {
             animation: crystalAnswer 0.6s ease-out;
         }
-
         @keyframes crystalAnswer {
             0% { text-shadow: 0 0 10px #ffffff; }
             30% { text-shadow: 0 0 60px #e0c8ff, 0 0 120px #c098f0, 0 0 20px #ffffff; }
             100% { text-shadow: 0 0 25px #d0b0ff, 0 0 10px #ffffff; }
         }
-
         .warning-nfc {
             color: #b88080;
             font-size: 9px;
@@ -392,20 +356,17 @@
     <div class="nebula-one"></div>
     <div class="nebula-two"></div>
     <div class="stars-layer" id="starsLayer"></div>
-
     <div class="main-title">
         <span class="title-deco-left">-=</span>
         Оракул
         <span class="title-deco-right">=-</span>
     </div>
-
     <div class="crystal-container">
         <div class="crystal-ball">
             <div class="inner-glow"></div>
             <div class="core-shadow"></div>
             <div class="crystal-reflection"></div>
             <div class="crystal-side-glow"></div>
-            
             <div class="crystal-content">
                 <div class="answer-screen">
                     <div id="answer-text">Судьба ждёт</div>
@@ -413,29 +374,22 @@
                 <div class="crystal-symbol">◈ ◈ ◈</div>
             </div>
         </div>
-
         <div class="ritual-panel">
             <div class="steps-column">
                 <div class="step-row"><span class="step-bullet">•</span><span>ЗАДАЙ ВОПРОС</span></div>
                 <div class="step-row"><span class="step-bullet">•</span><span>СОСРЕДОТОЧЬСЯ</span></div>
-                <div class="step-row"><span class="step-bullet">•</span><span>НАЖМИ УЗНАТЬ</span></div>
+                <div class="step-row"><span class="step-bullet">•</span><span>НАЖМИ КНОПКУ</span></div>
                 <div class="step-row"><span class="step-bullet">•</span><span>ПРИЛОЖИ БРЕЛОК</span></div>
             </div>
         </div>
-
-        <button class="ask-btn" id="askButton">УЗНАТЬ</button>
-        
+        <button class="ask-btn" id="askButton">ЖДУ ВОПРОС</button>
         <div class="portal-status" id="portalStatus">Нажмите кнопку</div>
-        
         <div class="warning-nfc" id="warningMsg">NFC недоступен. Используйте Chrome на Android.</div>
-
         <div class="counter-text"><span id="counterDisplay">0</span> ОТКРОВЕНИЙ</div>
     </div>
-
     <script>
         (function(){
             "use strict";
-
             function generateStars() {
                 const layer = document.getElementById('starsLayer');
                 for (let i = 0; i < 180; i++) {
@@ -452,28 +406,25 @@
                 }
             }
             generateStars();
-
             const positive = ["Да", "Звёзды — да", "Всё сложится", "Благоприятно", "Не сомневайся", "Истинно", "Удача рядом", "Путь открыт", "Знаки добрые", "Верь в успех", "Так и будет", "Твоя правда", "Перспективы ясны", "Скоро", "Предначертано"];
             const neutral = ["Неясно", "Туманно", "Спроси позже", "Всё в твоих руках", "Время покажет", "Возможно", "Не сейчас", "Пятьдесят на пятьдесят", "Судьба молчит", "Размыто", "И да, и нет", "Неопределённо", "Доверься себе", "Переменчиво", "Равновесие"];
             const negative = ["Нет", "Звёзды против", "Не надейся", "Не в этот раз", "Отступись", "Путь закрыт", "Препятствия", "Не стоит", "Повремени", "Иллюзии", "Неблагоприятно", "Забудь", "Ловушка", "Ответ — нет", "Не сейчас"];
             const allAnswers = [...positive, ...neutral, ...negative];
-
             const answerElement = document.getElementById('answer-text');
             const askButton = document.getElementById('askButton');
             const portalStatus = document.getElementById('portalStatus');
             const warningMsg = document.getElementById('warningMsg');
             const counterSpan = document.getElementById('counterDisplay');
-
             let revelationCount = 0;
             try { const saved = localStorage.getItem('crystal_oracle_count'); if (saved) revelationCount = parseInt(saved, 10) || 0; } catch(e) {}
             function updateCounter() { counterSpan.textContent = revelationCount; try { localStorage.setItem('crystal_oracle_count', revelationCount); } catch(e) {} }
             updateCounter();
-
-            let scanCooldown = false;
             let ndefReader = null;
-            let isScanning = false;
-
+            let isWaitingForAnswer = false;
+            let answerReceived = false;
             function deliverProphecy() {
+                if (!isWaitingForAnswer) return;
+                if (answerReceived) return;
                 revelationCount++;
                 updateCounter();
                 const prophecy = allAnswers[Math.floor(Math.random() * allAnswers.length)];
@@ -485,40 +436,62 @@
                     setTimeout(() => answerElement.classList.remove('flash-answer'), 600);
                 }, 70);
                 if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(35);
+                answerReceived = true;
+                isWaitingForAnswer = false;
+                askButton.textContent = 'НОВЫЙ ВОПРОС';
+                askButton.disabled = false;
+                portalStatus.textContent = 'Нажмите для нового вопроса';
+                if (ndefReader) {
+                    try { ndefReader.stop(); } catch(e) {}
+                    ndefReader = null;
+                }
             }
-
             if (!('NDEFReader' in window)) {
                 askButton.disabled = true;
                 warningMsg.style.display = 'block';
                 portalStatus.textContent = 'NFC не поддерживается';
             }
-
-            async function startScan() {
+            async function startWaiting() {
                 if (!('NDEFReader' in window)) { portalStatus.textContent = 'NFC недоступен'; return; }
-                if (isScanning) { portalStatus.textContent = 'Сканер уже активен'; return; }
+                if (isWaitingForAnswer) return;
                 try {
+                    if (ndefReader) {
+                        try { ndefReader.stop(); } catch(e) {}
+                    }
                     ndefReader = new NDEFReader();
+                    isWaitingForAnswer = true;
+                    answerReceived = false;
                     portalStatus.textContent = 'Приложите брелок';
                     askButton.disabled = true;
                     askButton.textContent = 'ЖДУ...';
-                    isScanning = true;
                     await ndefReader.scan();
-                    ndefReader.onreading = () => {
-                        if (scanCooldown) return;
-                        deliverProphecy();
-                        portalStatus.textContent = 'Пророчество явлено';
-                        scanCooldown = true;
-                        setTimeout(() => { scanCooldown = false; portalStatus.textContent = 'Приложите брелок'; }, 2000);
-                    };
+                    ndefReader.onreading = () => { deliverProphecy(); };
                     ndefReader.onreadingerror = () => { portalStatus.textContent = 'Ошибка чтения'; };
                 } catch (error) {
                     portalStatus.textContent = 'Не удалось запустить';
                     askButton.disabled = false;
-                    askButton.textContent = 'УЗНАТЬ';
-                    isScanning = false;
+                    askButton.textContent = 'ЖДУ ВОПРОС';
+                    isWaitingForAnswer = false;
                 }
             }
-            askButton.addEventListener('click', startScan);
+            function resetForNewQuestion() {
+                askButton.textContent = 'ЖДУ ВОПРОС';
+                askButton.disabled = false;
+                portalStatus.textContent = 'Нажмите кнопку';
+                isWaitingForAnswer = false;
+                answerReceived = false;
+                if (ndefReader) {
+                    try { ndefReader.stop(); } catch(e) {}
+                    ndefReader = null;
+                }
+            }
+            askButton.addEventListener('click', function() {
+                if (askButton.textContent === 'ЖДУ ВОПРОС') {
+                    startWaiting();
+                } else if (askButton.textContent === 'НОВЫЙ ВОПРОС') {
+                    resetForNewQuestion();
+                }
+            });
         })();
     </script>
 </body>
