@@ -171,7 +171,7 @@
             justify-content: center;
         }
 
-        /* ----- ИДЕАЛЬНО КРУГЛЫЙ ШАР ----- */
+        /* ----- ИДЕАЛЬНО КРУГЛЫЙ ШАР (БЕЗ КОНФЛИКТОВ) ----- */
         .crystal-ball {
             background: 
                 radial-gradient(circle at 25% 20%, 
@@ -203,9 +203,8 @@
             justify-content: center;
             position: relative;
             margin-bottom: 14px;
-            animation: floatSphere 9s infinite ease-in-out;
+            animation: floatSphere 6s infinite ease-in-out;
             overflow: hidden;
-            transform: perspective(800px) rotateX(2deg) rotateY(-3deg);
         }
 
         .crystal-content {
@@ -328,8 +327,8 @@
         }
 
         @keyframes floatSphere {
-            0%, 100% { transform: perspective(800px) rotateX(2deg) rotateY(-3deg) translateY(0px); }
-            50% { transform: perspective(800px) rotateX(3deg) rotateY(-5deg) translateY(-6px); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
         }
 
         .answer-screen {
