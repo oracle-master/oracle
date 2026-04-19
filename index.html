@@ -378,11 +378,11 @@
             <div class="steps-column">
                 <div class="step-row"><span class="step-bullet">•</span><span>ЗАДАЙ ВОПРОС</span></div>
                 <div class="step-row"><span class="step-bullet">•</span><span>СОСРЕДОТОЧЬСЯ</span></div>
-                <div class="step-row"><span class="step-bullet">•</span><span>НАЖМИ КНОПКУ</span></div>
+                <div class="step-row"><span class="step-bullet">•</span><span>НАЖМИ УЗНАТЬ</span></div>
                 <div class="step-row"><span class="step-bullet">•</span><span>ПРИЛОЖИ БРЕЛОК</span></div>
             </div>
         </div>
-        <button class="ask-btn" id="askButton">ЖДУ ВОПРОС</button>
+        <button class="ask-btn" id="askButton">УЗНАТЬ</button>
         <div class="portal-status" id="portalStatus">Нажмите кнопку</div>
         <div class="warning-nfc" id="warningMsg">NFC недоступен. Используйте Chrome на Android.</div>
         <div class="counter-text"><span id="counterDisplay">0</span> ОТКРОВЕНИЙ</div>
@@ -420,11 +420,12 @@
             function updateCounter() { counterSpan.textContent = revelationCount; try { localStorage.setItem('crystal_oracle_count', revelationCount); } catch(e) {} }
             updateCounter();
             let ndefReader = null;
-            let isWaitingForAnswer = false;
-            let answerReceived = false;
+            let isScanning = false;
+            let cooldown = false;
+            const COOLDOWN_TIME = 8000; // 8 секунд паузы после ответа
             function deliverProphecy() {
-                if (!isWaitingForAnswer) return;
-                if (answerReceived) return;
+                if (!isScanning) return;
+                if (cooldown) return;
                 revelationCount++;
                 updateCounter();
                 const prophecy = allAnswers[Math.floor(Math.random() * allAnswers.length)];
@@ -436,62 +437,59 @@
                     setTimeout(() => answerElement.classList.remove('flash-answer'), 600);
                 }, 70);
                 if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(35);
-                answerReceived = true;
-                isWaitingForAnswer = false;
-                askButton.textContent = 'НОВЫЙ ВОПРОС';
-                askButton.disabled = false;
-                portalStatus.textContent = 'Нажмите для нового вопроса';
+                
+                // Включаем защиту от повторов
+                cooldown = true;
+                portalStatus.textContent = 'Пророчество явлено. Пауза...';
+                
+                // Отключаем сканер, чтобы не было повторных срабатываний
                 if (ndefReader) {
                     try { ndefReader.stop(); } catch(e) {}
                     ndefReader = null;
                 }
+                isScanning = false;
+                askButton.disabled = false;
+                askButton.textContent = 'УЗНАТЬ';
+                
+                // Через 8 секунд сбрасываем статус
+                setTimeout(() => {
+                    cooldown = false;
+                    if (!isScanning) {
+                        portalStatus.textContent = 'Нажмите кнопку';
+                    }
+                }, COOLDOWN_TIME);
             }
             if (!('NDEFReader' in window)) {
                 askButton.disabled = true;
                 warningMsg.style.display = 'block';
                 portalStatus.textContent = 'NFC не поддерживается';
             }
-            async function startWaiting() {
+            async function startScan() {
                 if (!('NDEFReader' in window)) { portalStatus.textContent = 'NFC недоступен'; return; }
-                if (isWaitingForAnswer) return;
+                if (isScanning) { portalStatus.textContent = 'Сканер уже активен'; return; }
+                if (cooldown) { portalStatus.textContent = 'Подождите немного...'; return; }
                 try {
-                    if (ndefReader) {
-                        try { ndefReader.stop(); } catch(e) {}
-                    }
                     ndefReader = new NDEFReader();
-                    isWaitingForAnswer = true;
-                    answerReceived = false;
                     portalStatus.textContent = 'Приложите брелок';
                     askButton.disabled = true;
                     askButton.textContent = 'ЖДУ...';
+                    isScanning = true;
                     await ndefReader.scan();
                     ndefReader.onreading = () => { deliverProphecy(); };
-                    ndefReader.onreadingerror = () => { portalStatus.textContent = 'Ошибка чтения'; };
+                    ndefReader.onreadingerror = () => { 
+                        portalStatus.textContent = 'Ошибка чтения'; 
+                        askButton.disabled = false;
+                        askButton.textContent = 'УЗНАТЬ';
+                        isScanning = false;
+                    };
                 } catch (error) {
                     portalStatus.textContent = 'Не удалось запустить';
                     askButton.disabled = false;
-                    askButton.textContent = 'ЖДУ ВОПРОС';
-                    isWaitingForAnswer = false;
+                    askButton.textContent = 'УЗНАТЬ';
+                    isScanning = false;
                 }
             }
-            function resetForNewQuestion() {
-                askButton.textContent = 'ЖДУ ВОПРОС';
-                askButton.disabled = false;
-                portalStatus.textContent = 'Нажмите кнопку';
-                isWaitingForAnswer = false;
-                answerReceived = false;
-                if (ndefReader) {
-                    try { ndefReader.stop(); } catch(e) {}
-                    ndefReader = null;
-                }
-            }
-            askButton.addEventListener('click', function() {
-                if (askButton.textContent === 'ЖДУ ВОПРОС') {
-                    startWaiting();
-                } else if (askButton.textContent === 'НОВЫЙ ВОПРОС') {
-                    resetForNewQuestion();
-                }
-            });
+            askButton.addEventListener('click', startScan);
         })();
     </script>
 </body>
